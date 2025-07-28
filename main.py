@@ -78,8 +78,9 @@ class MyLayout(GridLayout):
 class ChecklistApp(App):
     def build(self):
         self.icon = self.resource_path('check.png')
+        xl2 = load_workbook(self.resource_path('checklist.xlsx'))
         return MyLayout()
-        #return Builder.load_file(self.resource_path('calculator.kv'))
+        return Builder.load_file(self.resource_path('checklist.kv'))
     def start_app(self):
         self.ids.task1.text = self.sheet['A1']
         
