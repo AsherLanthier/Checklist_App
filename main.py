@@ -77,7 +77,7 @@ class MyLayout(GridLayout):
     
 class ChecklistApp(App):
     def build(self):
-        #self.icon = self.resource_path('Calculator_icon.png')
+        self.icon = self.resource_path('check.png')
         return MyLayout()
         #return Builder.load_file(self.resource_path('calculator.kv'))
     def start_app(self):
