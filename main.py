@@ -68,7 +68,11 @@ class MyLayout(GridLayout):
         self.ids.task5.text = ""
         self.save_data()
     def clear_checks(self):
-        pass
+        self.ids.check1.active = False
+        self.ids.check2.active = False
+        self.ids.check3.active = False
+        self.ids.check4.active = False
+        self.ids.check5.active = False
 
     
 class ChecklistApp(App):

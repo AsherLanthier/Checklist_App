@@ -61,18 +61,23 @@
             size_hint: (None, 0.95)
             
             CheckBox:
+                id: check1
                 active: root.is_checked[0]
                 on_active: root.checked(self, self.active, root.sheet['B1'], root.ids.task1, root.red)
             CheckBox:
+                id: check2
                 active: root.is_checked[1]
                 on_active: root.checked(self, self.active, root.sheet['B2'], root.ids.task2, root.blue)
             CheckBox:
+                id: check3
                 active: root.is_checked[2]
                 on_active: root.checked(self, self.active, root.sheet['B3'], root.ids.task3, root.green)
             CheckBox:
+                id: check4
                 active: root.is_checked[3]
                 on_active: root.checked(self, self.active, root.sheet['B4'], root.ids.task4, root.purple)
             CheckBox:
+                id: check5
                 active: root.is_checked[4]
                 on_active: root.checked(self, self.active, root.sheet['B5'], root.ids.task5, root.yellow)
 
