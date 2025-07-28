@@ -59,6 +59,16 @@ class MyLayout(GridLayout):
         self.sheet['A4'] = self.ids.task4.text
         self.sheet['A5'] = self.ids.task5.text
         self.xl.save('checklist.xlsx')
+        
+    def clear_tasks(self):
+        self.ids.task1.text = ""
+        self.ids.task2.text = ""
+        self.ids.task3.text = ""
+        self.ids.task4.text = ""
+        self.ids.task5.text = ""
+        self.save_data()
+    def clear_checks(self):
+        pass
 
     
 class ChecklistApp(App):
