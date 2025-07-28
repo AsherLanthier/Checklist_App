@@ -10,6 +10,12 @@
     color: (0,0,0,1)
     size_hint: (None, 0.95)
 
+<Button>
+    font_size: 30
+    background_normal: ""
+    background_color: (0.7, 0.7, 0.7, 1)
+    color: (0,0,0)
+
 <MyLayout>
     GridLayout:
         size: root.width, root.height
@@ -71,11 +77,22 @@
                 on_active: root.checked(self, self.active, root.sheet['B5'], root.ids.task5, root.yellow)
 
 
-        Button:
-            text: "Save"
-            size_hint: (None, None)
-            height: 60
-            width: 160
-            font_size: 30
-            on_press: root.save_data()
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint:(1, None)
+            height: 80
+            spacing: 10
+            padding: 10
+            
+            Button:
+                text: "Save"
+                on_press: root.save_data()
+                
+            Button:
+                text: "Clear Tasks"
+                on_press: root.clear_tasks()
+                
+            Button:
+                text: "Clear Checks"
+                on_press: root.clear_checks()
             
