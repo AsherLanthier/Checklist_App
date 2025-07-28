@@ -1,0 +1,81 @@
+<TextInput>
+    font_size: 32
+    color: (0,0,0)
+    background_color: (0,0.8,1,0.5)
+    halign: 'center'
+    padding: [0, (self.height - self.line_height) / 2, 0, (self.height - self.line_height) / 2]
+    multiline: False
+
+<CheckBox>
+    color: (0,0,0,1)
+    size_hint: (None, 0.95)
+
+<MyLayout>
+    GridLayout:
+        size: root.width, root.height
+        cols: 2
+        background_color: (1,1,1,1)
+        canvas.before:
+            Color:
+                rgba: self.background_color
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                
+
+        BoxLayout:
+            orientation: "vertical"
+
+            padding: 20
+            spacing: 20
+
+            TextInput:
+                id: task1
+                background_color: root.red if root.is_checked[0] == False else root.gray
+                text: root.sheet['A1'].value
+            TextInput:
+                id: task2
+                background_color: root.blue if root.is_checked[1] == False else root.gray
+                text: root.sheet['A2'].value
+            TextInput:
+                id: task3
+                background_color: root.green if root.is_checked[2] == False else root.gray
+                text: root.sheet['A3'].value
+            TextInput:
+                id: task4
+                background_color: root.purple if root.is_checked[3] == False else root.gray
+                text: root.sheet['A4'].value
+            TextInput:
+                id: task5
+                background_color: root.yellow if root.is_checked[4] == False else root.gray
+                text: root.sheet['A5'].value
+            
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: (None, 0.95)
+            
+            CheckBox:
+                active: root.is_checked[0]
+                on_active: root.checked(self, self.active, root.sheet['B1'], root.ids.task1, root.red)
+            CheckBox:
+                active: root.is_checked[1]
+                on_active: root.checked(self, self.active, root.sheet['B2'], root.ids.task2, root.blue)
+            CheckBox:
+                active: root.is_checked[2]
+                on_active: root.checked(self, self.active, root.sheet['B3'], root.ids.task3, root.green)
+            CheckBox:
+                active: root.is_checked[3]
+                on_active: root.checked(self, self.active, root.sheet['B4'], root.ids.task4, root.purple)
+            CheckBox:
+                active: root.is_checked[4]
+                on_active: root.checked(self, self.active, root.sheet['B5'], root.ids.task5, root.yellow)
+
+
+        Button:
+            text: "Save"
+            size_hint: (None, None)
+            height: 60
+            width: 160
+            font_size: 30
+            on_press: root.save_data()
+            
