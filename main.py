@@ -18,18 +18,17 @@ class MyLayout(GridLayout):
     purple = (212/255.0, 174/255.0, 242/255.0,1)
     yellow = (240/255.0, 235/255.0, 144/255.0,1)
 
+    days = ["Monday", "Tuesday", "Wednesday"]
+
     xl = load_workbook('checklist.xlsx')
     sheet = xl['Sheet1']
-
-    cells = ['A1', 'A2', 'A3', 'A4', 'A5']
     
+    cells = ['A1', 'A2', 'A3', 'A4', 'A5']
     for cell in cells:
         if sheet[cell].value is None:
             sheet[cell].value = " "
 
     is_checked = [False, False, False, False, False]
-    
-    xl.save('checklist.xlsx')
 
     
     if sheet['B1'].value == "True":
@@ -43,6 +42,31 @@ class MyLayout(GridLayout):
     if sheet['B5'].value == "True":
         is_checked[4] = True
 
+    text1 = sheet['A1']
+    text2 = sheet['A2']
+    text3 = sheet['A3']
+    text4 = sheet['A4']
+    text5 = sheet['A5']
+
+    def day_selected(self, value):
+        if value == "Monday":
+            cells = ['A1', 'A2', 'A3', 'A4', 'A5']
+        elif value == "Tuesday":
+            cells = ['C1', 'C2', 'C3', 'C4', 'C5']
+        elif value == "Wednesday":
+            cells = ['E1', 'E2', 'E3', 'E4', 'E5']
+
+
+        for cell in cells:
+            if self.sheet[cell].value is None:
+                    self.sheet[cell].value = " "
+
+        self.text1 = self.sheet[cells[0]]
+        self.ids.task1.text = self.text1.value
+
+        
+        self.ids.task1.text = self.text1.value
+
     def checked(self, instance, value, cell, which_box, which_color):
         if value:
             cell.value = "True"
@@ -53,7 +77,7 @@ class MyLayout(GridLayout):
         self.xl.save('checklist.xlsx')
         
     def save_data(self):
-        self.sheet['A1'] = self.ids.task1.text
+        self.text1.value = self.ids.task1.text
         self.sheet['A2'] = self.ids.task2.text
         self.sheet['A3'] = self.ids.task3.text
         self.sheet['A4'] = self.ids.task4.text

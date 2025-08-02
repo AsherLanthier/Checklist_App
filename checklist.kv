@@ -11,15 +11,16 @@
     size_hint: (None, 0.95)
 
 <Button>
-    font_size: 30
+    font_size: 25
     background_normal: ""
     background_color: (0.7, 0.7, 0.7, 1)
     color: (0,0,0)
 
 <MyLayout>
-    GridLayout:
+
+    BoxLayout:
+        orientation: "vertical"
         size: root.width, root.height
-        cols: 2
         background_color: (1,1,1,1)
         canvas.before:
             Color:
@@ -27,65 +28,11 @@
             Rectangle:
                 size: self.size
                 pos: self.pos
-                
-
-        BoxLayout:
-            orientation: "vertical"
-
-            padding: 20
-            spacing: 20
-
-            TextInput:
-                id: task1
-                background_color: root.red if root.is_checked[0] == False else root.gray
-                text: root.sheet['A1'].value
-            TextInput:
-                id: task2
-                background_color: root.blue if root.is_checked[1] == False else root.gray
-                text: root.sheet['A2'].value
-            TextInput:
-                id: task3
-                background_color: root.green if root.is_checked[2] == False else root.gray
-                text: root.sheet['A3'].value
-            TextInput:
-                id: task4
-                background_color: root.purple if root.is_checked[3] == False else root.gray
-                text: root.sheet['A4'].value
-            TextInput:
-                id: task5
-                background_color: root.yellow if root.is_checked[4] == False else root.gray
-                text: root.sheet['A5'].value
-            
-        BoxLayout:
-            orientation: "vertical"
-            size_hint: (None, 0.95)
-            
-            CheckBox:
-                id: check1
-                active: root.is_checked[0]
-                on_active: root.checked(self, self.active, root.sheet['B1'], root.ids.task1, root.red)
-            CheckBox:
-                id: check2
-                active: root.is_checked[1]
-                on_active: root.checked(self, self.active, root.sheet['B2'], root.ids.task2, root.blue)
-            CheckBox:
-                id: check3
-                active: root.is_checked[2]
-                on_active: root.checked(self, self.active, root.sheet['B3'], root.ids.task3, root.green)
-            CheckBox:
-                id: check4
-                active: root.is_checked[3]
-                on_active: root.checked(self, self.active, root.sheet['B4'], root.ids.task4, root.purple)
-            CheckBox:
-                id: check5
-                active: root.is_checked[4]
-                on_active: root.checked(self, self.active, root.sheet['B5'], root.ids.task5, root.yellow)
-
 
         BoxLayout:
             orientation: "horizontal"
             size_hint:(1, None)
-            height: 80
+            height: 70
             spacing: 10
             padding: 10
             
@@ -100,4 +47,66 @@
             Button:
                 text: "Clear Checks"
                 on_press: root.clear_checks()
+                
+            Spinner:
+                id: which_day
+                text: "Day"
+                values: root.days
+                on_text: root.day_selected(which_day.text)
+        
+        GridLayout:
+            cols: 2
             
+
+            BoxLayout:
+                orientation: "vertical"
+
+                padding: 20
+                spacing: 20
+
+                TextInput:
+                    id: task1
+                    background_color: root.red if root.is_checked[0] == False else root.gray
+                    text: root.text1.value
+                TextInput:
+                    id: task2
+                    background_color: root.blue if root.is_checked[1] == False else root.gray
+                    text: root.sheet['A2'].value
+                TextInput:
+                    id: task3
+                    background_color: root.green if root.is_checked[2] == False else root.gray
+                    text: root.sheet['A3'].value
+                TextInput:
+                    id: task4
+                    background_color: root.purple if root.is_checked[3] == False else root.gray
+                    text: root.sheet['A4'].value
+                TextInput:
+                    id: task5
+                    background_color: root.yellow if root.is_checked[4] == False else root.gray
+                    text: root.sheet['A5'].value
+                
+            BoxLayout:
+                orientation: "vertical"
+                size_hint: (None, 0.95)
+                
+                CheckBox:
+                    id: check1
+                    active: root.is_checked[0]
+                    on_active: root.checked(self, self.active, root.sheet['B1'], root.ids.task1, root.red)
+                CheckBox:
+                    id: check2
+                    active: root.is_checked[1]
+                    on_active: root.checked(self, self.active, root.sheet['B2'], root.ids.task2, root.blue)
+                CheckBox:
+                    id: check3
+                    active: root.is_checked[2]
+                    on_active: root.checked(self, self.active, root.sheet['B3'], root.ids.task3, root.green)
+                CheckBox:
+                    id: check4
+                    active: root.is_checked[3]
+                    on_active: root.checked(self, self.active, root.sheet['B4'], root.ids.task4, root.purple)
+                CheckBox:
+                    id: check5
+                    active: root.is_checked[4]
+                    on_active: root.checked(self, self.active, root.sheet['B5'], root.ids.task5, root.yellow)
+                
