@@ -34,7 +34,6 @@ class MyLayout(GridLayout):
     is_checked2 = [False, False, False, False, False]
     is_checked = [False, False, False, False, False]
 
-    which_is_checked = is_checked1
 
     
     if sheet[check_cells[0]].value == "True":
@@ -106,6 +105,31 @@ class MyLayout(GridLayout):
         if self.sheet[check_cells[4]].value == "True":
             self.is_checked[4] = True
 
+    text1 = sheet['A1']
+    text2 = sheet['A2']
+    text3 = sheet['A3']
+    text4 = sheet['A4']
+    text5 = sheet['A5']
+
+    def day_selected(self, value):
+        if value == "Monday":
+            cells = ['A1', 'A2', 'A3', 'A4', 'A5']
+        elif value == "Tuesday":
+            cells = ['C1', 'C2', 'C3', 'C4', 'C5']
+        elif value == "Wednesday":
+            cells = ['E1', 'E2', 'E3', 'E4', 'E5']
+
+
+        for cell in cells:
+            if self.sheet[cell].value is None:
+                    self.sheet[cell].value = " "
+
+        self.text1 = self.sheet[cells[0]]
+        self.ids.task1.text = self.text1.value
+
+        
+        self.ids.task1.text = self.text1.value
+
     def checked(self, instance, value, cell, which_box, which_color):
         if value:
             cell.value = "True"
@@ -117,10 +141,12 @@ class MyLayout(GridLayout):
         
     def save_data(self):
         self.text1.value = self.ids.task1.text
+
         self.text2.value = self.ids.task2.text
         self.text3.value = self.ids.task3.text
         self.text4.value = self.ids.task4.text
         self.text5.value = self.ids.task5.text
+
         self.xl.save('checklist.xlsx')
         
     def clear_tasks(self):
