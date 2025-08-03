@@ -7,6 +7,7 @@ from kivy.resources import resource_add_path
 from kivy.lang import Builder
 import openpyxl
 from openpyxl import Workbook, load_workbook
+from datetime import datetime
 
 
 class MyLayout(GridLayout):
@@ -19,16 +20,24 @@ class MyLayout(GridLayout):
     yellow = (240/255.0, 235/255.0, 144/255.0,1)
 
     days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    now = datetime.now()
+    day_name = now.strftime("%A")
+
+    
+
 
     xl = load_workbook('checklist.xlsx')
     sheet = xl['Sheet1']
+
     
     cells = ['A1', 'A2', 'A3', 'A4', 'A5']
     check_cells = ['B1', 'B2', 'B3', 'B4', 'B5']
+    
 
     for cell in cells:
         if sheet[cell].value is None:
             sheet[cell].value = " "
+    
 
     is_checked = [False, False, False, False, False]
 
@@ -132,6 +141,7 @@ class MyLayout(GridLayout):
         self.text4.value = self.ids.task4.text
         self.text5.value = self.ids.task5.text
         self.xl.save('checklist.xlsx')
+        print(self.day_name)
         
     def clear_tasks(self):
         self.ids.task1.text = ""
