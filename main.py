@@ -30,22 +30,19 @@ class MyLayout(GridLayout):
         if sheet[cell].value is None:
             sheet[cell].value = " "
 
-    is_checked1 = [False, False, False, False, False]
-    is_checked2 = [False, False, False, False, False]
     is_checked = [False, False, False, False, False]
-
 
     
     if sheet[check_cells[0]].value == "True":
-        which_is_checked[0] = True
+        is_checked[0] = True
     if sheet[check_cells[1]].value == "True":
-        which_is_checked[1] = True
+        is_checked[1] = True
     if sheet[check_cells[2]].value == "True":
-        which_is_checked[2] = True
+        is_checked[2] = True
     if sheet[check_cells[3]].value == "True":
-        which_is_checked[3] = True
+        is_checked[3] = True
     if sheet[check_cells[4]].value == "True":
-        which_is_checked[4] = True
+        is_checked[4] = True
 
     text1 = sheet['A1']
     text2 = sheet['A2']
@@ -56,27 +53,25 @@ class MyLayout(GridLayout):
     def day_selected(self, value):
         if value == "Monday":
             cells = ['A1', 'A2', 'A3', 'A4', 'A5']
-            check_cells = ['B1', 'B2', 'B3', 'B4', 'B5']
-            which_is_checked = self.is_checked1
+            self.check_cells = ['B1', 'B2', 'B3', 'B4', 'B5']
         elif value == "Tuesday":
             cells = ['C1', 'C2', 'C3', 'C4', 'C5']
-            check_cells = ['D1', 'D2', 'D3', 'D4', 'D5']
-            which_is_checked = self.is_checked2
+            self.check_cells = ['D1', 'D2', 'D3', 'D4', 'D5']
         elif value == "Wednesday":
             cells = ['E1', 'E2', 'E3', 'E4', 'E5']
-            check_cells = ['F1', 'F2', 'F3', 'F4', 'F5']
+            self.check_cells = ['F1', 'F2', 'F3', 'F4', 'F5']
         elif value == "Thursday":
             cells = ['G1', 'G2', 'G3', 'G4', 'G5']
-            check_cells = ['H1', 'H2', 'H3', 'H4', 'H5']
+            self.check_cells = ['H1', 'H2', 'H3', 'H4', 'H5']
         elif value == "Friday":
             cells = ['I1', 'I2', 'I3', 'I4', 'I5']
-            check_cells = ['J1', 'J2', 'J3', 'J4', 'J5']
+            self.check_cells = ['J1', 'J2', 'J3', 'J4', 'J5']
         elif value == "Saturday":
             cells = ['K1', 'K2', 'K3', 'K4', 'K5']
-            check_cells = ['L1', 'L2', 'L3', 'L4', 'L5']
+            self.check_cells = ['L1', 'L2', 'L3', 'L4', 'L5']
         elif value == "Sunday":
             cells = ['M1', 'M2', 'M3', 'M4', 'M5']
-            check_cells = ['N1', 'N2', 'N3', 'N4', 'N5']
+            self.check_cells = ['N1', 'N2', 'N3', 'N4', 'N5']
 
 
         for cell in cells:
@@ -94,59 +89,48 @@ class MyLayout(GridLayout):
         self.ids.task4.text = self.text4.value
         self.ids.task5.text = self.text5.value
 
-        if self.sheet[check_cells[0]].value == "True":
-            self.which_is_checked[0] = True
-        if self.sheet[check_cells[1]].value == "True":
-            self.is_checked[1] = True
-        if self.sheet[check_cells[2]].value == "True":
-            self.is_checked[2] = True
-        if self.sheet[check_cells[3]].value == "True":
-            self.is_checked[3] = True
-        if self.sheet[check_cells[4]].value == "True":
-            self.is_checked[4] = True
 
-    text1 = sheet['A1']
-    text2 = sheet['A2']
-    text3 = sheet['A3']
-    text4 = sheet['A4']
-    text5 = sheet['A5']
-
-    def day_selected(self, value):
-        if value == "Monday":
-            cells = ['A1', 'A2', 'A3', 'A4', 'A5']
-        elif value == "Tuesday":
-            cells = ['C1', 'C2', 'C3', 'C4', 'C5']
-        elif value == "Wednesday":
-            cells = ['E1', 'E2', 'E3', 'E4', 'E5']
-
-
-        for cell in cells:
-            if self.sheet[cell].value is None:
-                    self.sheet[cell].value = " "
-
-        self.text1 = self.sheet[cells[0]]
-        self.ids.task1.text = self.text1.value
-
-        
-        self.ids.task1.text = self.text1.value
+        if self.sheet[self.check_cells[0]].value == "True":
+            self.ids.check1.active = True
+        else:
+            self.ids.check1.active = False
+            
+        if self.sheet[self.check_cells[1]].value == "True":
+            self.ids.check2.active = True
+        else:
+            self.ids.check2.active = False
+            
+        if self.sheet[self.check_cells[2]].value == "True":
+            self.ids.check3.active = True
+        else:
+            self.ids.check3.active = False
+            
+        if self.sheet[self.check_cells[3]].value == "True":
+            self.ids.check4.active = True
+        else:
+            self.ids.check4.active = False
+            
+        if self.sheet[self.check_cells[4]].value == "True":
+            self.ids.check5.active = True
+        else:
+            self.ids.check5.active = False
 
     def checked(self, instance, value, cell, which_box, which_color):
         if value:
-            cell.value = "True"
+            self.sheet[cell].value = "True"
             which_box.background_color = self.gray
         else:
-            cell.value = "False"
+            self.sheet[cell].value = "False"
             which_box.background_color = which_color
+            
         self.xl.save('checklist.xlsx')
         
     def save_data(self):
         self.text1.value = self.ids.task1.text
-
         self.text2.value = self.ids.task2.text
         self.text3.value = self.ids.task3.text
         self.text4.value = self.ids.task4.text
         self.text5.value = self.ids.task5.text
-
         self.xl.save('checklist.xlsx')
         
     def clear_tasks(self):
