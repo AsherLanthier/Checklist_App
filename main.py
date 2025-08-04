@@ -31,7 +31,7 @@ class MyLayout(GridLayout):
 
     
     cells = ['A1', 'A2', 'A3', 'A4', 'A5']
-    check_cells = ['B1', 'B2', 'B3', 'B4', 'B5']
+    check_cells = []
     
 
     for cell in cells:
@@ -40,8 +40,41 @@ class MyLayout(GridLayout):
     
 
     is_checked = [False, False, False, False, False]
+        
 
-    
+    if day_name == "Monday":
+        cells = ['A1', 'A2', 'A3', 'A4', 'A5']
+        check_cells = ['B1', 'B2', 'B3', 'B4', 'B5']
+    elif day_name == "Tuesday":
+        cells = ['C1', 'C2', 'C3', 'C4', 'C5']
+        check_cells = ['D1', 'D2', 'D3', 'D4', 'D5']
+    elif day_name == "Wednesday":
+        cells = ['E1', 'E2', 'E3', 'E4', 'E5']
+        check_cells = ['F1', 'F2', 'F3', 'F4', 'F5']
+    elif day_name == "Thursday":
+        cells = ['G1', 'G2', 'G3', 'G4', 'G5']
+        check_cells = ['H1', 'H2', 'H3', 'H4', 'H5']
+    elif day_name == "Friday":
+        cells = ['I1', 'I2', 'I3', 'I4', 'I5']
+        check_cells = ['J1', 'J2', 'J3', 'J4', 'J5']
+    elif day_name == "Saturday":
+        cells = ['K1', 'K2', 'K3', 'K4', 'K5']
+        check_cells = ['L1', 'L2', 'L3', 'L4', 'L5']
+    elif day_name == "Sunday":
+        cells = ['M1', 'M2', 'M3', 'M4', 'M5']
+        check_cells = ['N1', 'N2', 'N3', 'N4', 'N5']
+
+
+    for cell in cells:
+        if sheet[cell].value is None:
+                sheet[cell].value = " "
+
+    text1 = sheet[cells[0]]
+    text2 = sheet[cells[1]]
+    text3 = sheet[cells[2]]
+    text4 = sheet[cells[3]]
+    text5 = sheet[cells[4]]
+
     if sheet[check_cells[0]].value == "True":
         is_checked[0] = True
     if sheet[check_cells[1]].value == "True":
@@ -52,12 +85,6 @@ class MyLayout(GridLayout):
         is_checked[3] = True
     if sheet[check_cells[4]].value == "True":
         is_checked[4] = True
-
-    text1 = sheet['A1']
-    text2 = sheet['A2']
-    text3 = sheet['A3']
-    text4 = sheet['A4']
-    text5 = sheet['A5']
 
     def day_selected(self, value):
         if value == "Monday":
